@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nba-predictor-service
+spec:
+  type: LoadBalancer  # Can be NodePort for internal access
+  selector:
+    app: nba-predictor
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000

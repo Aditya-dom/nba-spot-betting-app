@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nba-predictor-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nba-predictor
+  template:
+    metadata:
+      labels:
+        app: nba-predictor
+    spec:
+      containers:
+      - name: nba-predictor-container
+        image: nba-predictor:latest  # Ensure this tag matches your Docker build
+        ports:
+        - containerPort: 8000
+        env:
+        - name: NBA_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: nba-api-secret
+              key: api_key

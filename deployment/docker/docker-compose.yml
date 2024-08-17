@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  nba-predictor:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    ports:
+      - "8000:8000"
