@@ -108,7 +108,7 @@ git clone https://github.com/Aditya-dom/NBA-Spot-betting-app.git
 Navigate to the project directory:
 
 ```sh
-cd NBA_AI
+cd NBA-Spot-betting-app
 ```
 
 Create a virtual environment:
