@@ -30,7 +30,6 @@ on:
 
 jobs:
   build-and-test:
-    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
