@@ -1,5 +1,5 @@
 [package]
-name = "nba-spot-betting-app"
+name = "sports-betting-api-rs"
 version = "0.1.0"
 edition = "2018"
 
@@ -16,7 +16,7 @@ reqwest = "0.11.12"
 env_logger = "0.10.0"
 csv = "1.1.6"
 polars = "0.25.1"
-tensorflow = "^0.16.0"
+tensorflow = "0.16.0"
 openssl = { version = "0.10.36", features = ["vendored"] }
 protobuf = "3.2.0"
 log = "0.4.17"
