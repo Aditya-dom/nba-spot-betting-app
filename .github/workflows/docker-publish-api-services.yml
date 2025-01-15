@@ -3,23 +3,23 @@ name: Docker Build
 on:
   push:
     paths:
-      - 'api/api/**'
+      - 'api/services/**'
       - '**.toml'
-      - 'api/Dockerfile'
-      - '.github/workflows/docker-publish-api.yml'
+      - 'api/Dockerfile-services'
+      - '.github/workflows/docker-publish-api-services.yml'
     branches: [ main, ci-test , feature/revamp ]
 
 env:
-  IMAGE_NAME: api
+  IMAGE_NAME: api-microservices
 
 jobs:
-  build-api:
+  build-api-services:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build . --build-arg VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,') --file Dockerfile --tag $IMAGE_NAME
+        run: docker build . --build-arg VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,') --file Dockerfile-services --tag $IMAGE_NAME
         working-directory: ./api
 
       - name: Log into registry

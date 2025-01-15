@@ -1,7 +1,3 @@
-target
-Dockerfile
-.dockerignore
-.git
-.gitignore
-*.md
-.env
+.venv
+.idea
+**/__pycache__
