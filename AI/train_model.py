@@ -13,6 +13,8 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 
 keras.__version__
 
@@ -23,7 +25,7 @@ print("Num TPUs Available: ", len(tf.config.list_physical_devices('TPU')))
 
 """# Read in the Data """
 
-rawData = pd.read_excel("Full-Data-Set-UnderOver-2020-21.xlsx")
+rawData = pd.read_excel("/Users/arawn/nba-spot-betting-app/AI/Full-Data-Set-UnderOver-2020-21.xlsx")
 print(rawData)
 rawData = rawData.sample(frac=1) #randomize the arrangement of rawData
 print(rawData)
@@ -77,32 +79,18 @@ x_test = filteredData.take(range(test_len, len(filteredData)))
 y_train = output.take(range(test_len))
 y_test = output.take(range(test_len, len(filteredData)))
 
-model = keras.Sequential()
+model = Sequential([
+    Dense(64, activation='relu', input_shape=(x_train.shape[1],)),
+    Dense(1, activation='linear')
+])
 
-model.add( tf.keras.layers.Dense(2048, activation='relu', name='input_layer'))
-model.add( tf.keras.layers.Dense(1024, activation='relu'))
-model.add( tf.keras.layers.Dense(512, activation='relu'))
-model.add( tf.keras.layers.Dense(256, activation='relu'))
-
-model.add( tf.keras.layers.Dense(
-    512, input_dim=512,
-    kernel_regularizer=tf.keras.regularizers.L1(0.0001),
-    activity_regularizer=tf.keras.regularizers.L2(0.0001)) )
-
-model.add( tf.keras.layers.Dense(512, activation='relu'))
-model.add( tf.keras.layers.Dense(1024, activation='relu'))
-model.add( tf.keras.layers.Dense(2, activation='softmax', name='output_layer'))
-
-model.build( x_train.shape )
-model.summary()
-
-model.compile( optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'] )
+model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 
 import random
-model.fit(x_train, y_train, epochs=500, batch_size=random.randint(2000,5000))
+model.fit(x_train, y_train, epochs=10, batch_size=32)
 
 predictions = model.predict([x_test])
 
 """# Save the Model"""
 
-model.save('model')
+model.save('model.keras')
