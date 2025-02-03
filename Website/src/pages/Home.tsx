@@ -12,7 +12,7 @@ const Home: Component = () => {
           </div>
 
           <div class="mt-6 flex items-center justify-center gap-4">
-            <a href="https://github.com/day-mon/sports-betting-ai" class="transform rounded-md bg-white px-5 py-3 font-medium text- transition-colors hover:bg-indigo-700">
+            <a href="https://github.com/Aditya-dom/nba-spot-betting-app" class="transform rounded-md bg-white px-5 py-3 font-medium text- transition-colors hover:bg-indigo-700">
               View Code
             </a>
           </div>
